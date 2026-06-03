@@ -19,12 +19,14 @@ app.post("/api/fileanalyse", upload.single("upfile"), (req, res) => {
     return res.json({ error: "No file uploaded" })
   }
 
-  res.json({
-    name: req.file.originalname,
-    type: req.file.mimetype,
-    size: req.file.size
-  })
-})
+  const file = req.file;
+
+  return res.json({
+    name: file.originalname,
+    type: file.mimetype,
+    size: file.size
+  });
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
