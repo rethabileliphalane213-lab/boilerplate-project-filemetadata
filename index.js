@@ -14,19 +14,15 @@ app.get('/', function (req, res) {
 });
 
 app.post("/api/fileanalyse", upload.single("upfile"), (req, res) => {
-  if(req.file){
+  if (!req.file) {
+    return res.status(400).json({ error: "No file uploaded" });
+  }
 
-     res.json({
-   "name": req.file.originalname,
-    "type": req.file.mimetype,
-    "size": req.file.size
+  res.json({
+    name: req.file.originalname,
+    type: req.file.mimetype,
+    size: req.file.size
   });
-
-  }
-  else{
-    res.status(404).send("File not found")
-  }
- 
 });
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
