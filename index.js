@@ -17,11 +17,14 @@ app.get('/', function (req, res) {
 });
 
 app.post('/api/fileanalyse', upload.single('upfile'), function(req, res) {
+  app.post('/api/fileanalyse', upload.single('upfile'), function(req, res) {
   res.json({
+    test: "latest-version",
     name: req.file.originalname,
     type: req.file.mimetype,
     size: req.file.size
   });
+});
 });
 
 app.use(function(req, res) {
